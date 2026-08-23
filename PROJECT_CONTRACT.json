@@ -1,0 +1,51 @@
+{
+  "schema_version": 1,
+  "metrics": {
+    "production_loc": 2301,
+    "production_files": 37,
+    "production_packages": 9,
+    "test_files": 10,
+    "production_functions": 184,
+    "decision_points": 317
+  },
+  "persistence": {
+    "module": "go.etcd.io/bbolt",
+    "entities": [
+      "Record",
+      "AuditEvent",
+      "Workflow",
+      "Attachment"
+    ],
+    "reopen_test": "TestPersistenceSurvivesReopen"
+  },
+  "workflows": [
+    {
+      "steps": [
+        "create game and initialize board",
+        "play legal moves and finish the game",
+        "register Record and Workflow",
+        "review and confirm the result",
+        "publish and archive the audit trail"
+      ],
+      "test": "TestWorkflowCreateReviewConfirmArchive"
+    },
+    {
+      "steps": [
+        "filter records by region",
+        "select the first matching record",
+        "apply two ordered collaborator updates",
+        "review and publish the consistent result"
+      ],
+      "test": "TestWorkflowSearchUpdatePublish"
+    },
+    {
+      "steps": [
+        "read deterministic transcript text",
+        "validate coordinates and turn order",
+        "persist Attachment and linked result",
+        "produce the import report"
+      ],
+      "test": "TestWorkflowImportValidatePersistReport"
+    }
+  ]
+}
