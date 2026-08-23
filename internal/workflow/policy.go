@@ -23,7 +23,9 @@ func ValidateTransitionInput(target, actor, note string) error {
 			return errors.New("publish note is required")
 		}
 	case StateConfirmed:
-		return nil
+		if strings.TrimSpace(note) == "" {
+			return errors.New("confirm note is required")
+		}
 	}
 	return nil
 }

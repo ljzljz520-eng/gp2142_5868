@@ -69,6 +69,9 @@ func (s *Service) ReviewRecord(recordID, reviewer, note string) (store.Workflow,
 }
 
 func (s *Service) ConfirmRecord(recordID, reviewer, note string) (store.Workflow, error) {
+	if strings.TrimSpace(note) == "" {
+		return store.Workflow{}, errors.New("confirm note is required")
+	}
 	return s.Workflow.Confirm(recordID, reviewer, note)
 }
 
